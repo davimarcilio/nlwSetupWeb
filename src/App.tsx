@@ -1,5 +1,9 @@
-function App() {
-  return <h1>Hello</h1>;
-}
+import { Habit } from "./components/Habit";
 
-export default App;
+export function App() {
+  return (
+    <div>
+      <Habit completed={2} />
+    </div>
+  );
+}
