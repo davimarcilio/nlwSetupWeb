@@ -23,7 +23,7 @@ export function SummaryTable() {
       </div>
       <div className="grid grid-rows-7 grid-flow-col gap-3">
         {summaryDates.map((date) => (
-          <HabitDay key={date.toString()} />
+          <HabitDay amout={5} completed={0} key={date.toString()} />
         ))}
         {amoutOfDaysToFill > 0 &&
           Array.from({ length: amoutOfDaysToFill }).map((_, index) => (
