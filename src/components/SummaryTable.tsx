@@ -5,6 +5,9 @@ const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
 
 const summaryDates = generateDatesFromYearBeginning();
 
+const minimumSummaryDatesSize = 14 * 7;
+const amoutOfDaysToFill = minimumSummaryDatesSize - summaryDates.length;
+
 export function SummaryTable() {
   return (
     <div className="w-full flex">
@@ -22,6 +25,13 @@ export function SummaryTable() {
         {summaryDates.map((date) => (
           <HabitDay key={date.toString()} />
         ))}
+        {amoutOfDaysToFill > 0 &&
+          Array.from({ length: amoutOfDaysToFill }).map((_, index) => (
+            <div
+              key={index}
+              className="w-10 h-10 bg-zinc-900 border-2 border-zinc-800 rounded-lg opacity-40 cursor-not-allowed"
+            />
+          ))}
       </div>
     </div>
   );
