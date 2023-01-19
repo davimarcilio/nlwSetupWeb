@@ -1,5 +1,6 @@
 import { Check } from "phosphor-react";
 import * as Checkbox from "@radix-ui/react-checkbox";
+import { FormEvent, useState } from "react";
 
 const avaliableWeekDays = [
   "Domingo",
@@ -12,12 +13,28 @@ const avaliableWeekDays = [
 ];
 
 export function NewHabitForm() {
+  const [title, setTitle] = useState("");
+  const [weekDays, setWeekDays] = useState<number[]>([]);
+
+  function createNewHabit(e: FormEvent) {
+    e.preventDefault();
+  }
+
+  function handleToggleWeekDay(weekDay: number) {
+    if (weekDays.includes(weekDay)) {
+      return setWeekDays((state) => state.filter((WK) => WK !== weekDay));
+    }
+    return setWeekDays((state) => [...state, weekDay]);
+  }
+
   return (
-    <form className="w-full flex flex-col mt-6">
+    <form onSubmit={createNewHabit} className="w-full flex flex-col mt-6">
       <label htmlFor="title" className="font-semibold leading-tight">
         Qual seu comprometimento
       </label>
       <input
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
         className="p-4 rounded-lg mt-3 bg-zinc-800 text-white placeholder:text-zinc-400"
         type="text"
         id="title"
@@ -28,10 +45,11 @@ export function NewHabitForm() {
         Qual a recorrência?
       </label>
       <div className="flex flex-col gap-2 mt-3">
-        {avaliableWeekDays.map((weekDay) => (
+        {avaliableWeekDays.map((weekDay, index) => (
           <Checkbox.Root
             key={weekDay}
             className="flex items-center group  gap-3"
+            onCheckedChange={() => handleToggleWeekDay(index)}
           >
             <div className="h-8 w-8 rounded-lg flex items-center transition-all group-data-[state=checked]:border-green-500 group-data-[state=checked]:bg-green-500 justify-center bg-zinc-900 border-2 border-zinc-800">
               <Checkbox.Indicator>
