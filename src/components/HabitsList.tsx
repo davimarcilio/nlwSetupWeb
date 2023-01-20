@@ -31,6 +31,24 @@ export function HabitsList({ date }: HabitsListProps) {
 
   const isDateInPast = dayjs(date).endOf("day").isBefore(new Date());
 
+  async function handleToggleHabit(habitId: string) {
+    await api.patch(`/habits/${habitId}/toggle`);
+
+    const isHabitAlreadyCompleted = habits!.completedHabits.includes(habitId);
+
+    let completedHabits: string[] = [];
+
+    if (isHabitAlreadyCompleted) {
+      completedHabits = habits!.completedHabits.filter((id) => id !== habitId);
+    } else {
+      completedHabits = [...habits!.completedHabits, habitId];
+    }
+    setHabits({
+      possibleHabits: habits!.possibleHabits,
+      completedHabits,
+    });
+  }
+
   return (
     <div className="mt-6 flex flex-col gap-3">
       {habits?.possibleHabits.map((habit) => {
@@ -38,6 +56,7 @@ export function HabitsList({ date }: HabitsListProps) {
           <Checkbox.Root
             checked={habits.completedHabits.includes(habit.id)}
             key={habit.id}
+            onCheckedChange={() => handleToggleHabit(habit.id)}
             className="flex items-center group  gap-3"
             disabled={isDateInPast}
           >
