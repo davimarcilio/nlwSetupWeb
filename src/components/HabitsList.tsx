@@ -6,6 +6,7 @@ import { api } from "../lib/axios";
 
 interface HabitsListProps {
   date: Date;
+  onCompletedChanged: (completed: number) => void;
 }
 
 interface HabitsListItems {
@@ -17,7 +18,7 @@ interface HabitsListItems {
   completedHabits: string[];
 }
 
-export function HabitsList({ date }: HabitsListProps) {
+export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
   const [habits, setHabits] = useState<HabitsListItems>();
   useEffect(() => {
     api
@@ -47,6 +48,7 @@ export function HabitsList({ date }: HabitsListProps) {
       possibleHabits: habits!.possibleHabits,
       completedHabits,
     });
+    onCompletedChanged(completedHabits.length);
   }
 
   return (
@@ -57,10 +59,10 @@ export function HabitsList({ date }: HabitsListProps) {
             checked={habits.completedHabits.includes(habit.id)}
             key={habit.id}
             onCheckedChange={() => handleToggleHabit(habit.id)}
-            className="flex items-center group  gap-3"
+            className="flex items-center group  gap-3 focus:outline-none disabled:cursor-not-allowed"
             disabled={isDateInPast}
           >
-            <div className="h-8 w-8 rounded-lg flex items-center transition-all group-data-[state=checked]:border-green-500 group-data-[state=checked]:bg-green-500 justify-center bg-zinc-900 border-2 border-zinc-800">
+            <div className="h-8 w-8 rounded-lg flex items-center transition-all group-data-[state=checked]:border-green-500 group-data-[state=checked]:bg-green-500 justify-center bg-zinc-900 border-2 border-zinc-800 group-focus:outline-none group-focus:ring-2 group-focus:ring-violet-700 group-focus:ring-offset-2 group-focus:ring-offset-background">
               <Checkbox.Indicator>
                 <Check className="text-white" size={20} />
               </Checkbox.Indicator>

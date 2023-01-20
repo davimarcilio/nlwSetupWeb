@@ -46,7 +46,7 @@ export function NewHabitForm() {
       <input
         onChange={(e) => setTitle(e.target.value)}
         value={title}
-        className="p-4 rounded-lg mt-3 bg-zinc-800 text-white placeholder:text-zinc-400"
+        className="p-4 rounded-lg mt-3 bg-zinc-800 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-700 focus:ring-offset-2 focus:ring-offset-zinc-900"
         type="text"
         id="title"
         placeholder="ex.: Exercícios, Dormir bem, etc..."
@@ -60,12 +60,12 @@ export function NewHabitForm() {
           <Checkbox.Root
             checked={weekDays.includes(index)}
             key={weekDay}
-            className="flex items-center group  gap-3"
+            className="focus:outline-none flex items-center group  gap-3"
             onCheckedChange={() => handleToggleWeekDay(index)}
           >
-            <div className="h-8 w-8 rounded-lg flex items-center transition-all group-data-[state=checked]:border-green-500 group-data-[state=checked]:bg-green-500 justify-center bg-zinc-900 border-2 border-zinc-800">
+            <div className="h-8 w-8 group-focus:outline-none group-focus:ring-2 group-focus:ring-violet-700 group-focus:ring-offset-2 group-focus:ring-offset-zinc-900 rounded-lg flex items-center transition-all group-data-[state=checked]:border-green-500 group-data-[state=checked]:bg-green-500 justify-center bg-zinc-900 border-2 border-zinc-800">
               <Checkbox.Indicator>
-                <Check className="text-white" size={20} />
+                <Check className="text-white " size={20} />
               </Checkbox.Indicator>
             </div>
 
@@ -74,7 +74,7 @@ export function NewHabitForm() {
         ))}
       </div>
       <button
-        className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold bg-green-600 hover:bg-green-500 transition-colors"
+        className="mt-6 focus:outline-none focus:ring-2 focus:ring-violet-700 focus:ring-offset-2 focus:ring-offset-zinc-900 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold bg-green-600 hover:bg-green-500 transition-colors"
         type="submit"
       >
         <Check size={20} weight={"bold"} />
