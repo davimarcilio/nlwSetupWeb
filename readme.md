@@ -15,7 +15,13 @@
 
 - Primeiro você deve ter o [Back-End](https://github.com/davimarcilio/nlwSetupServer/tree/c86e61c3a88a21f5b290715c3ffc1110dc1be96e) rodando
 
-- Abra o terminal na pasta raiz do projeto **nlwSetupWeb** e digite o comando
+- Abra o terminal na pasta raiz do projeto **nlwSetupWeb** e digite o comando:
+
+```terminal
+npm install
+```
+
+- Após a instalação concluir digite o comando:
 
 ```terminal
 npm run dev
